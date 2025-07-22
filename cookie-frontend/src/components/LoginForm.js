@@ -1,25 +1,23 @@
 function LoginForm(){
     return(
-        <form method="post">
+        <form method="post" id="loginForm">
             <h2>Login</h2>
             <table>
                 <tbody>
                     <tr>
-                        <td>username</td>
+                        <td>Username:</td>
                         <td><input></input></td>
                     </tr>
                     <tr>
-                        <td>password</td>
-                        <td><input></input></td>
+                        <td>Password:</td>
+                        <td><input type="password"></input></td>
                     </tr>
                     <tr>
-                        <td colSpan="2"><button>log in</button></td>
+                        <td colSpan="2"><button>Login</button></td>
                     </tr>
                 </tbody>
             </table>
         </form>
-
-        //return to home page link 
     )
 }
 

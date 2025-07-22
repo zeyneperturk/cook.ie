@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* header */
+
+#header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#header h1{
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    flex: 5;
+    text-align: center;
+}
+
+#header h1 a{
+    font-family: Nunito;
+    text-decoration: none;
+    color: black;
+    display:inline-block;
+}
+
+#header input{
+    flex: 5;
+    height: 24px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+#header #nav{
+    flex: 4;
+    text-align: center;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#header #nav a{
+    margin: 0;
+    padding: 0;
+    font-family:Nunito;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+/* login form */
+
+#loginForm{
+    font-family: Nunito;
+    margin: 100px auto;
+    width: 300px;
+    padding: 17px;
+    border: 1px solid lightgrey;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginForm h2{
+   text-align: center;
+   margin: 0px 0px 8px 0px;
+}
+
+#loginForm table{
+    width: 100%;
+}
+
+#loginForm table tr{
+    text-align: center;
+    height: 50px;
+}
+
+#loginForm table tr:last-of-type{
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+}
+
+#loginForm table input{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 8px;
+}
+
+#loginForm table button{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 25px;
+    background-color: white;
+    padding: 7px 10px;
+}
+
+/* sign up */

@@ -1,28 +1,29 @@
 function SignupForm(){
 
     return(
-        <form>
+        <form method="post" id="signupForm">
             <table>
                 <tbody>
                     <tr>
-                        <td>username</td>
+                        <td>Username:</td>
                         <td><input></input></td>
                     </tr>
                     <tr>
-                        <td>first name</td>
-                        <td><textbox></textbox></td>
+                        <td>First Name:</td>
+                        <td><input></input></td>
+                        <td>Last Name:</td>
+                        <td><input></input></td>
                     </tr>
                     <tr>
-                        <td>last name</td>
-                        <td></td>
+                        <td>Email:</td>
+                        <td><input></input></td>
                     </tr>
                     <tr>
-                        <td>email</td>
-                        <td></td>
+                        <td>Password:</td>
+                        <td><input type="password"></input></td>
                     </tr>
-                    <tr>
-                        <td>password</td>
-                        <td></td>
+                    <tr colspan="2">
+                        <button>Sign Up</button>
                     </tr>
                 </tbody>
             </table>
@@ -30,3 +31,5 @@ function SignupForm(){
     )
     
 }
+
+export default SignupForm;
