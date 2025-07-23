@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials="true")
 public class UserController {
 	
 	@Autowired
@@ -54,7 +54,7 @@ public class UserController {
     	User user = (User) session.getAttribute("user");
     	if(user==null)
     		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Not logged in"));
-    	return ResponseEntity.ok("user");
+    	return ResponseEntity.ok(user);
     }
     
     @PostMapping("/logout")

@@ -30,7 +30,7 @@ import Signup from "./pages/Signup";
   }
 
   async function fetchCurrentUser(){
-    const response = await fetch('http://localhost:8080/users/session', {credentials: 'include'});
+    const response = await fetch('http://localhost:8080/users/session', {credentials: "include",});
     
     if(!response.ok)
       return null;
@@ -78,7 +78,7 @@ function App() {
         />
         <Route
           path="/login"
-          element= {<PublicRoute user={user}> <Login onLogin={handleLogin} error={error}/> </PublicRoute>}
+          element= {<PublicRoute user={user}> <Login onLogin={handleLogin}/> </PublicRoute>}
         />
         <Route
           path="/signup"

@@ -1,12 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm(){
+function LoginForm( {onLogin}){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-       
+       const user = {email, password};
 
+       if(onLogin){
+        await onLogin(email, password);
+        navigate('/home');
+       }   
     }
 
     return(
