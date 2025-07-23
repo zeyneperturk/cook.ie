@@ -1,16 +1,26 @@
+import { useState } from "react";
+
 function LoginForm(){
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (e) => {
+       
+
+    }
+
     return(
-        <form method="post" id="loginForm">
+        <form onSubmit={handleSubmit} id="loginForm">
             <h2>Login</h2>
             <table>
                 <tbody>
                     <tr>
-                        <td>Username:</td>
-                        <td><input type="text" name="username"></input></td>
+                        <td>Email:</td>
+                        <td><input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}></input></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type="password" name="password"></input></td>
+                        <td><input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input></td>
                     </tr>
                     <tr>
                         <td colSpan="2"><button>Login</button></td>

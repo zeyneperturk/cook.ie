@@ -1,3 +1,3 @@
-export const isLoggedIn = () => {
-    return !!localStorage.getItem("userToken");
+export const isLoggedIn = (user) => {
+    return user!==null;
 }

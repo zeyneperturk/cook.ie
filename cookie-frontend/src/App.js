@@ -26,7 +26,6 @@ import Signup from "./pages/Signup";
     }
 
     const user = await response.json();
-    localStorage.setItem('userToken', 'true');
     return user;
   }
 
@@ -36,7 +35,7 @@ import Signup from "./pages/Signup";
     if(!response.ok)
       return null;
 
-    return null;
+    return await response.json();
   }
 
   async function logout(){
@@ -63,12 +62,12 @@ function App() {
     }catch(e){
       setError(e.message);
     }
+  }
 
-    async function handleLogout(){
+  async function handleLogout(){
       await logout();
       setUser(null);
     }
-  }
 
   return(
     <BrowserRouter>
@@ -79,11 +78,11 @@ function App() {
         />
         <Route
           path="/login"
-          element= {<PublicRoute> <Login/> </PublicRoute>}
+          element= {<PublicRoute user={user}> <Login onLogin={handleLogin} error={error}/> </PublicRoute>}
         />
         <Route
           path="/signup"
-          element= {<PublicRoute> <Signup/> </PublicRoute>}
+          element= {<PublicRoute user={user}> <Signup/> </PublicRoute>}
         />
         <Route
           path="/home"
@@ -92,7 +91,7 @@ function App() {
         
         <Route
           path="/profile"
-          element= {<PrivateRoute> <Profile/> </PrivateRoute>}
+          element= {<PrivateRoute user={user}> <Profile onLogout={handleLogout}/> </PrivateRoute>}
         />
       </Routes>
     </BrowserRouter>

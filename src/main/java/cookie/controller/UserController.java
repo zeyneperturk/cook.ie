@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -40,7 +41,7 @@ public class UserController {
     	
     	if(user == null || !user.getPassword().equals(loginRequest.getPassword()))
     	{
-    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error","Invalid email or password"));
     	}
     	
     	session.setAttribute("user", user);
@@ -52,7 +53,7 @@ public class UserController {
     {
     	User user = (User) session.getAttribute("user");
     	if(user==null)
-    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Not logged in"));
     	return ResponseEntity.ok("user");
     }
     
