@@ -30,7 +30,10 @@ import Signup from "./pages/Signup";
   }
 
   async function fetchCurrentUser(){
-    const response = await fetch('http://localhost:8080/users/session', {credentials: "include",});
+    const response = await fetch('http://localhost:8080/users/session', 
+      {method: 'GET', 
+        headers: {"Content-Type": "application/json"},
+        credentials: 'include',});
     
     if(!response.ok)
       return null;
@@ -49,9 +52,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(()=>{
-    fetchCurrentUser().then(setUser).catch(()=>setUser(null));
-  }, []);
+  // useEffect(()=>{
+  //   fetchCurrentUser().then(setUser).catch(()=>setUser(null));
+  // }, []);
 
   async function handleLogin(email, password)
   {
