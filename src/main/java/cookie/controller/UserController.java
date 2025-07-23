@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping
 	public List<User> getAllUsers() {
@@ -39,7 +43,7 @@ public class UserController {
     {
     	User user = userService.getUserByEmail(loginRequest.getEmail());
     	
-    	if(user == null || !user.getPassword().equals(loginRequest.getPassword()))
+    	if(user == null || !passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
     	{
     		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error","Invalid email or password"));
     	}

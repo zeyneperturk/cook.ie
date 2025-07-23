@@ -7,12 +7,13 @@ function LoginForm( {onLogin}){
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
        const user = {email, password};
 
        if(onLogin){
         await onLogin(email, password);
         navigate('/home');
-       }   
+       }
     }
 
     return(
