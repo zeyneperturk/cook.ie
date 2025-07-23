@@ -6,18 +6,69 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Profile from "./pages/Profile";
 import { Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 
-function App() {
-  const [users, setUsers] = useState([]);
+ async function login(email, password) {
+    const response = await fetch('http://localhost:8080/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({email, password}),
+    });
 
-  // useEffect(()=>{
-  //   fetch("http://localhost:8080/users")
-  //   .then((res)=>res.json())
-  //   .then((data)=>setUsers(data))
-  //   .catch((err)=>console.error("Error: ", err));
-  // }, []); 
+    if(!response.ok)
+    {
+      throw new Error('invalid email or password')
+    }
+
+    const user = await response.json();
+    localStorage.setItem('userToken', 'true');
+    return user;
+  }
+
+  async function fetchCurrentUser(){
+    const response = await fetch('http://localhost:8080/users/session', {credentials: 'include'});
+    
+    if(!response.ok)
+      return null;
+
+    return null;
+  }
+
+  async function logout(){
+    await fetch('http://localhost:8080/users/logout',{
+      method: 'POST',
+      credentials: 'include',
+    })
+  }
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(()=>{
+    fetchCurrentUser().then(setUser).catch(()=>setUser(null));
+  }, []);
+
+  async function handleLogin(email, password)
+  {
+    try{
+      const loggedUser = await login(email, password);
+      setUser(loggedUser);
+      setError(null);
+    }catch(e){
+      setError(e.message);
+    }
+
+    async function handleLogout(){
+      await logout();
+      setUser(null);
+    }
+  }
 
   return(
     <BrowserRouter>
@@ -36,13 +87,13 @@ function App() {
         />
         <Route
           path="/home"
-          element= {<PublicRoute> <Home/> </PublicRoute>}
+          element= {<Home/>}
         />
         
-        {/* <Route
+        <Route
           path="/profile"
           element= {<PrivateRoute> <Profile/> </PrivateRoute>}
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );

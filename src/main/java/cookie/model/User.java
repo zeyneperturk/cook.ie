@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -20,7 +21,10 @@ public class User {
     private String first_name;
     private String last_name;
     private String username;
+    
+    @Column(unique = true)
     private String email;
+    private String password;
     
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -50,13 +54,14 @@ public class User {
 	// Constructors
     public User() {}
 
-	public User(int uid, String first_name, String last_name, String username, String email) {
+	public User(int uid, String first_name, String last_name, String username, String email, String password) {
 		super();
 		this.uid = uid;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.username = username;
 		this.email = email;
+		this.password = password;
 	}
 
 	public int getUid() {
@@ -99,5 +104,12 @@ public class User {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
    
 }

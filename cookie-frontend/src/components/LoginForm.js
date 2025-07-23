@@ -6,11 +6,11 @@ function LoginForm(){
                 <tbody>
                     <tr>
                         <td>Username:</td>
-                        <td><input></input></td>
+                        <td><input type="text" name="username"></input></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type="password"></input></td>
+                        <td><input type="password" name="password"></input></td>
                     </tr>
                     <tr>
                         <td colSpan="2"><button>Login</button></td>

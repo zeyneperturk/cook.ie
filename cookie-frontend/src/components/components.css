@@ -49,6 +49,11 @@
     color: black;
 }
 
+#header #nav div{
+    display: flex;
+    gap: 50px;
+}
+
 /* login form */
 
 #loginForm{
@@ -64,7 +69,7 @@
     align-items: center;
 }
 
-#loginForm h2{
+#loginForm h2, #signup h2{
    text-align: center;
    margin: 0px 0px 8px 0px;
 }
@@ -84,12 +89,12 @@
     height: 30px;
 }
 
-#loginForm table input{
+#loginForm table input, #signupForm input{
     border: 1px solid rgb(175, 175, 175);
     border-radius: 8px;
 }
 
-#loginForm table button{
+#loginForm table button, #signupForm button{
     border: 1px solid rgb(175, 175, 175);
     border-radius: 25px;
     background-color: white;
@@ -97,3 +102,23 @@
 }
 
 /* sign up */
+
+#signupForm{
+    font-family: Nunito;
+    margin: 100px auto;
+    width: 450px;
+    padding: 25px;
+    border: 1px solid lightgrey;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#signupForm br{
+    margin: 5px 0;
+}
+
+#signupForm > input{
+    width: 200px;
+}
