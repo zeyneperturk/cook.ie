@@ -13,7 +13,7 @@
     font-size: 3rem;
     font-weight: 700;
     margin: 0;
-    flex: 5;
+    flex: 4;
     text-align: center;
 }
 
@@ -122,3 +122,4 @@
 #signupForm > input{
     width: 200px;
 }
+

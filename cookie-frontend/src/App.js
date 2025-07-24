@@ -53,7 +53,15 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(()=>{
-    fetchCurrentUser().then(setUser).catch(()=>setUser(null));
+    fetchCurrentUser().then((user)=>{
+      if(user)
+      {
+        setUser(user);
+        sessionStorage.setItem("user", JSON.stringify(user));
+      }
+    }).catch(()=>{setUser(null);
+        sessionStorage.removeItem("user");
+    })
   }, []);
 
   async function handleLogin(email, password)
@@ -62,6 +70,7 @@ function App() {
       const loggedUser = await login(email, password);
       setUser(loggedUser);
       setError(null);
+      sessionStorage.setItem("user", JSON.stringify(loggedUser));
     }catch(e){
       setError(e.message);
     }
