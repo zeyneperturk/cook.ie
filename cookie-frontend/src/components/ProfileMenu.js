@@ -1,10 +1,12 @@
-function ProfileMenu(){
+import { Link } from "react-router-dom";
+
+function ProfileMenu({onLogout}){
     return(
         <div id="profileMenu">
             <ul>
                 <li></li>
                 <li></li>
-                <li>logout</li>
+                <li><Link to="/home" onClick={onLogout}>log out</Link></li>
             </ul>
         </div>
     );

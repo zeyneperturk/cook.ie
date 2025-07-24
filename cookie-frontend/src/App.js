@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Profile from "./pages/Profile";
 import { Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
+import NewRecipe from "./pages/NewRecipe";
 
  async function login(email, password) {
     const response = await fetch('http://localhost:8080/users/login', {
@@ -45,7 +46,9 @@ import Signup from "./pages/Signup";
     await fetch('http://localhost:8080/users/logout',{
       method: 'POST',
       credentials: 'include',
-    })
+    });
+
+    sessionStorage.removeItem("user");
   }
 
 function App() {
@@ -98,13 +101,18 @@ function App() {
         />
         <Route
           path="/home"
-          element= {<Home/>}
+          element= {<Home onLogout={handleLogout}/>}
         />
         
         <Route
           path="/profile"
           element= {<PrivateRoute user={user}> <Profile onLogout={handleLogout}/> </PrivateRoute>}
         />
+        <Route 
+          path="/newRecipe"
+          element= {<PrivateRoute user={user}><NewRecipe/></PrivateRoute>}
+        />
+          
       </Routes>
     </BrowserRouter>
   );

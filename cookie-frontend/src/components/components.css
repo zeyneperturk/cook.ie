@@ -123,3 +123,29 @@
     width: 200px;
 }
 
+#profileContainer{
+    position: relative;
+    display: inline-block;
+}
+
+#profileMenu{
+    display: none !important;
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px;
+    top: 100%;
+    right: 0;
+    z-index: 100;
+}
+
+#createMenu{
+    display: none !important;
+    position: absolute;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+#profileContainer:hover #profileMenu, #createContainer:hover #createMenu{
+    display: block !important;
+}
