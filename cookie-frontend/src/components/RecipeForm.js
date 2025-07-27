@@ -2,6 +2,36 @@ import { useState } from "react";
 
 function RecipeForm(){
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const recipe = {
+            title,
+            ingredients,
+            instructions: formattedInstructions
+        };
+
+        try{
+
+            console.log(JSON.stringify(recipe, null, 2));
+            const response = await fetch("http://localhost:8080/recipes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(recipe)
+            });
+
+            if(!response.ok){
+                throw new Error("failed to create recipe");
+            }
+
+            const data = await response.json();
+        }catch{
+            console.error("error creating recipe");
+        }
+    }
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState([
@@ -12,12 +42,17 @@ function RecipeForm(){
         }
     ]);
 
-    const [steps, setSteps] = useState([
+    const [instructions, setSteps] = useState([
         {
             stepNo: "",
             text: ""
         }
     ]);
+
+    const formattedInstructions = instructions.map((step, idx) =>({
+        ...step,
+        stepNo: idx + 1,
+    }));
 
     const ingredientChange = (idx, field, val) => {
         const updated = [...ingredients];
@@ -35,13 +70,13 @@ function RecipeForm(){
     }
 
     const stepChange = (idx, field, val) => {
-        const updated = [...steps];
+        const updated = [...instructions];
         updated[idx][field] = val;
         setSteps(updated);
     }
 
     const addStep = () => {
-        setSteps([...steps, {stepNo: "", text: ""}]);
+        setSteps([...instructions, {stepNo: "", text: ""}]);
     }
 
     const removeStep = () => {
@@ -78,19 +113,20 @@ function RecipeForm(){
             <div>
                 <h3>Instructions</h3>
                 {
-                    steps.map((step, idx)=>(
-                        <div>
+                    instructions.map((step, idx)=>(
+                        <div key={idx}>
                             <label>{idx + 1}</label>
-                            <textarea value={step.text} onChange={(e)=>stepChange(step, "text", e.target.value)}></textarea>
+                            <textarea value={step.text} onChange={(e)=>stepChange(idx, "text", e.target.value)}></textarea>
                         </div>
                     ))
                 }
                 <button type="button" onClick={addStep}>add step</button>
                 <button type="button" onClick={removeStep}>remove step</button>
             </div>
+
+            <button onClick={handleSubmit} type="submit">create recipe</button>
             
-        </form>
-        
+        </form>   
     )
 }
 
