@@ -23,6 +23,10 @@ public class Instruction {
 		this.text = text;
 		this.id = new KeyInstruction(step_num, recipe.getRid());
 	}
+	
+	public Instruction() {
+		
+	}
 
 	public KeyInstruction getId() {
 		return id;

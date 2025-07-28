@@ -1,10 +1,14 @@
 package cookie.controller;
 
 import java.util.Date;
+import org.springframework.core.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cookie.model.Ingredient;
 import cookie.model.Instruction;
+import cookie.model.KeyIngredient;
+import cookie.model.KeyInstruction;
 import cookie.model.Recipe;
+import cookie.model.User;
 import cookie.repository.IngredientRepository;
 import cookie.repository.InstructionRepository;
 import cookie.repository.RecipeRepository;
+import cookie.repository.UserRepository;
 import cookie.service.RecipeService;
+import cookie.service.UserService;
 
 @RestController
 @RequestMapping("/recipes")
@@ -30,11 +39,31 @@ public class RecipeController {
 	private IngredientRepository ingRepository;
 	
 	@Autowired
-	private InstructionRepository insRepository; 
+	private InstructionRepository insRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@PostMapping
     public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe)
     {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.getPrincipal());
+		
+		if(auth == null || !auth.isAuthenticated())
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		System.out.println(auth.getPrincipal());
+		
+		System.out.println(auth.getPrincipal());
+		System.out.println(auth.getPrincipal());
+		System.out.println(auth.getPrincipal());
+		System.out.println(auth.getPrincipal());
+		System.out.println(auth.getPrincipal());
+		
+		String name = auth.getName();
+		User user = userService.getUserByUsername(name);
+	
+		recipe.setUser(user);
 		recipe.setCreation_date(new Date());
 		
 		List<Ingredient> ing = recipe.getIngredients();
@@ -48,16 +77,23 @@ public class RecipeController {
 		if(ing!=null)
 		{
 			for(Ingredient val : ing)
+			{
 				val.setRecipe(save);
+				val.setId(new KeyIngredient(save.getRid(), val.getId().getName()));
+			}
+			
 		}
 		
 		if(ins!=null)
 		{
 			for(Instruction val : ins)
-				val.setRecipe(recipe);
+			{
+				val.setRecipe(save);
+				val.setId(new KeyInstruction(save.getRid(), val.getId().getStep_num()));
+			}
 		}
 		
-		Recipe finalSave = recipeService.createRecipe(recipe);
+		Recipe finalSave = recipeService.createRecipe(save);
 		
     	return ResponseEntity.ok(finalSave);
     }

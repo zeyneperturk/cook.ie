@@ -6,6 +6,7 @@ function RecipeForm(){
         e.preventDefault();
         const recipe = {
             title,
+            description,
             ingredients,
             instructions: formattedInstructions
         };
