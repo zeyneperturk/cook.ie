@@ -4,22 +4,34 @@ import cookie.dto.LoginRequest;
 import cookie.model.User;
 import cookie.repository.UserRepository;
 import cookie.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.naming.AuthenticationException;
+
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials="true")
 public class UserController {
+	
+	@Autowired
+	private AuthenticationManager auth;
 	
 	@Autowired
 	private UserService userService;
@@ -39,17 +51,22 @@ public class UserController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session)
-    {
-    	User user = userService.getUserByEmail(loginRequest.getEmail());
-    	
-    	if(user == null || !passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()))
-    	{
-    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error","Invalid email or password"));
-    	}
-    	
-    	session.setAttribute("user", user);
-    	return ResponseEntity.ok(user);
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) throws AuthenticationException {
+        UsernamePasswordAuthenticationToken authToken =
+		    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
+
+		Authentication authentication = auth.authenticate(authToken);
+
+		SecurityContext context = SecurityContextHolder.createEmptyContext();
+		context.setAuthentication(authentication);
+		SecurityContextHolder.setContext(context);
+
+		request.getSession(true).setAttribute(
+		    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+		    context
+		);
+
+		return ResponseEntity.ok(Map.of("message", "Login successful"));
     }
     
     @GetMapping("/session")
