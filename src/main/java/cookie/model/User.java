@@ -1,7 +1,11 @@
 package cookie.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,7 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-public class User implements Serializable{
+public class User implements Serializable, UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -112,5 +116,24 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Collection<? extends GrantedAuthority> getAuthorities(){
+		return List.of();
+	}
    
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	
+	public boolean isEnabled() {
+		return true;
+	}
 }

@@ -58,7 +58,7 @@ public class Ingredient {
 	}
 
 	public Ingredient() {
-		super();
+		this.id = new KeyIngredient(); 
 	}
 
 	

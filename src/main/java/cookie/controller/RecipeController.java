@@ -52,13 +52,6 @@ public class RecipeController {
 		
 		if(auth == null || !auth.isAuthenticated())
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		System.out.println(auth.getPrincipal());
-		
-		System.out.println(auth.getPrincipal());
-		System.out.println(auth.getPrincipal());
-		System.out.println(auth.getPrincipal());
-		System.out.println(auth.getPrincipal());
-		System.out.println(auth.getPrincipal());
 		
 		String name = auth.getName();
 		User user = userService.getUserByUsername(name);

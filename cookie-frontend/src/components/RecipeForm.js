@@ -37,7 +37,10 @@ function RecipeForm(){
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState([
         { 
-            name: "",
+            id: {
+                name: "",
+                rid: ""
+            },
             quantity: "",
             unit: ""
         }
@@ -45,7 +48,10 @@ function RecipeForm(){
 
     const [instructions, setSteps] = useState([
         {
-            stepNo: "",
+            id: {
+                stepNo: "",
+                rid: ""
+            },
             text: ""
         }
     ]);
@@ -57,12 +63,18 @@ function RecipeForm(){
 
     const ingredientChange = (idx, field, val) => {
         const updated = [...ingredients];
-        updated[idx][field] = val;
+        if(field.includes(".")){
+            const keys = field.split(".");
+            updated[idx][keys[0]][keys[1]] = val;
+        }
+        else{
+            updated[idx][field] = val;
+        }
         setIngredients(updated);
     };
 
     const addIngredient = () => {
-        setIngredients([...ingredients, {name: "", quantity: "", unit: ""}]);
+        setIngredients([...ingredients, {id: {name: "", rid: ""}, quantity: "", unit: ""}]);
         console.log("new ingredient");
     };
 
@@ -72,12 +84,18 @@ function RecipeForm(){
 
     const stepChange = (idx, field, val) => {
         const updated = [...instructions];
-        updated[idx][field] = val;
+        if(field.includes(".")){
+            const keys = field.split(".");
+            updated[idx][keys[0]][keys[1]] = val;
+        }
+        else{
+            updated[idx][field] = val;
+        }
         setSteps(updated);
     }
 
     const addStep = () => {
-        setSteps([...instructions, {stepNo: "", text: ""}]);
+        setSteps([...instructions, {id: {stepNo: "", rid: ""}, text: ""}]);
     }
 
     const removeStep = () => {
@@ -98,7 +116,7 @@ function RecipeForm(){
                     ingredients.map((ing, idx)=>(
                         <div key={idx}>
                             <label>Name: </label>
-                            <input type="text" value={ing.name} onChange={(e)=>ingredientChange(idx, "name", e.target.value)}></input>
+                            <input type="text" value={ing.id?.name || ""} onChange={(e)=>ingredientChange(idx, "id.name", e.target.value)}></input>
                             <label>Quantity: </label>
                             <input type="text" value={ing.quantity} onChange={(e)=>ingredientChange(idx, "quantity", e.target.value)}></input>
                             <label>Unit</label>

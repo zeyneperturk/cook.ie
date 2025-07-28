@@ -25,7 +25,7 @@ public class Instruction {
 	}
 	
 	public Instruction() {
-		
+		this.id = new KeyInstruction();
 	}
 
 	public KeyInstruction getId() {

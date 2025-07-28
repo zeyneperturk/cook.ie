@@ -52,7 +52,9 @@ public class UserController {
     
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken authToken =
+        
+    	try {
+    	UsernamePasswordAuthenticationToken authToken =
 		    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
 
 		Authentication authentication = auth.authenticate(authToken);
@@ -65,8 +67,14 @@ public class UserController {
 		    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
 		    context
 		);
+		
+		User user = (User) authentication.getPrincipal();
 
-		return ResponseEntity.ok(Map.of("message", "Login successful"));
+		return ResponseEntity.ok(user);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
+    	}
     }
     
     @GetMapping("/session")
