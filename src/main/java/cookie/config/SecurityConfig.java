@@ -26,6 +26,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/users/**").permitAll()
                 .requestMatchers("/recipes/**").permitAll()
+                .requestMatchers("/cookbooks/**").permitAll()
                 .anyRequest().authenticated()
             )
             .csrf(csrf -> csrf.disable())       

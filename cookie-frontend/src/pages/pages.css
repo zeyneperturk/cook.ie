@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-#login h1, #signup h1, #newRecipe h1{
+#login h1, #signup h1, #newRecipe h1, #newCookbook h1{
     font-family: Nunito;
     font-size: 3em;
     text-align: center;
@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-#login h1 a, #signup h1 a, #newRecipe h1 a{
+#login h1 a, #signup h1 a, #newRecipe h1 a, #newCookbook h1 a{
     color: black;
     text-decoration: none;
 }

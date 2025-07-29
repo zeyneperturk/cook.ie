@@ -49,7 +49,7 @@ function RecipeForm(){
     const [instructions, setSteps] = useState([
         {
             id: {
-                stepNo: "",
+                step_num: "",
                 rid: ""
             },
             text: ""
@@ -58,7 +58,10 @@ function RecipeForm(){
 
     const formattedInstructions = instructions.map((step, idx) =>({
         ...step,
-        stepNo: idx + 1,
+        id: {
+            ...step.id,
+            step_num: idx + 1,
+        },
     }));
 
     const ingredientChange = (idx, field, val) => {
@@ -95,7 +98,7 @@ function RecipeForm(){
     }
 
     const addStep = () => {
-        setSteps([...instructions, {id: {stepNo: "", rid: ""}, text: ""}]);
+        setSteps([...instructions, {id: {step_num: "", rid: ""}, text: ""}]);
     }
 
     const removeStep = () => {

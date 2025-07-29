@@ -67,12 +67,17 @@ public class RecipeController {
 		
 		Recipe save = recipeService.createRecipe(recipe);
 		
+		System.out.println(ing);
+		System.out.println(ins);
+		System.out.println(save);
+		
 		if(ing!=null)
 		{
 			for(Ingredient val : ing)
 			{
 				val.setRecipe(save);
 				val.setId(new KeyIngredient(save.getRid(), val.getId().getName()));
+				ingRepository.save(val);
 			}
 			
 		}
@@ -82,7 +87,8 @@ public class RecipeController {
 			for(Instruction val : ins)
 			{
 				val.setRecipe(save);
-				val.setId(new KeyInstruction(save.getRid(), val.getId().getStep_num()));
+				val.setId(new KeyInstruction(val.getId().getStep_num(), save.getRid()));
+				insRepository.save(val);
 			}
 		}
 		

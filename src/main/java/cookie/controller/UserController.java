@@ -69,6 +69,7 @@ public class UserController {
 		);
 		
 		User user = (User) authentication.getPrincipal();
+	    request.getSession(true).setAttribute("user", user);
 
 		return ResponseEntity.ok(user);
     	}catch(Exception e){

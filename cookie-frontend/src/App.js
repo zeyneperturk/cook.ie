@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import { Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 import NewRecipe from "./pages/NewRecipe";
+import NewCookBook from "./pages/NewCookBook";
 
  async function login(email, password) {
     const response = await fetch('http://localhost:8080/users/login', {
@@ -111,6 +112,10 @@ function App() {
         <Route 
           path="/newRecipe"
           element= {<PrivateRoute user={user}><NewRecipe/></PrivateRoute>}
+        />
+        <Route
+          path="/newCookbook"
+          element={<PrivateRoute user={user}><NewCookBook/></PrivateRoute>}
         />
           
       </Routes>
