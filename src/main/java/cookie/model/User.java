@@ -33,11 +33,11 @@ public class User implements Serializable, UserDetails{
     private String password;
     
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference
+    @JsonManagedReference("cookbook-user")
     private List<Cookbook> cookbooks;
     
     @OneToMany(mappedBy="user")
-    @JsonManagedReference
+    @JsonManagedReference("recipe-user")
     private List<Recipe> recipes;
     
 

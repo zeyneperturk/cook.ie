@@ -20,7 +20,7 @@ public class Category {
 	  private String name;
 	  
 	  @OneToMany(mappedBy="category")
-	  @JsonManagedReference
+	  @JsonManagedReference("category-recipe")
 	  private List<Recipe> recipes;
 
 	public int getCid() {

@@ -17,13 +17,13 @@ public class Cookbook_Recipe {
 	@ManyToOne
 	@MapsId("cid")
 	@JoinColumn(name="cid")
-	@JsonBackReference
+	@JsonBackReference("cookbook-key-link")
 	private Cookbook cookbook;
 	
 	@ManyToOne
 	@MapsId("rid")
 	@JoinColumn(name="rid")
-	@JsonBackReference
+	@JsonBackReference("recipe-key-link")
 	private Recipe recipe;
 
 	public Cookbook_Recipe(Cookbook cookbook, Recipe recipe) {

@@ -19,7 +19,7 @@ public class Ingredient {
 	@ManyToOne
 	@MapsId("rid")
 	@JoinColumn(name="rid")
-	@JsonBackReference
+	@JsonBackReference("ingredient-recipe")
 	private Recipe recipe;
 
 	public Ingredient(String name, float quantity, String unit, Recipe recipe) {

@@ -32,24 +32,24 @@ public class Recipe {
 	
 	@ManyToOne
 	@JoinColumn(name="uid")
-	@JsonBackReference
+	@JsonBackReference("recipe-user")
 	private User user;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name="cid", nullable = true)
-	@JsonBackReference
+	@JsonBackReference("category-recipe")
 	private Category category;
 	
 	@OneToMany(mappedBy = "recipe")
-	@JsonManagedReference
+	@JsonManagedReference("recipe-key-link")
     private List<Cookbook_Recipe> cookbookRecipes;
     
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("ingredient-recipe")
     private List<Ingredient> ingredients;
     
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("instruction-recipe")
     private List<Instruction> instructions;
 
     // Constructors

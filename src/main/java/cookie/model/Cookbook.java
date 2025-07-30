@@ -31,7 +31,7 @@ public class Cookbook {
     
     @ManyToOne
     @JoinColumn(name="uid", nullable = true)
-    @JsonBackReference
+    @JsonBackReference("cookbook-user")
     private User user;
     
     public int getCid() {
@@ -83,7 +83,7 @@ public class Cookbook {
 	}
 
 	@OneToMany(mappedBy = "cookbook")
-	@JsonManagedReference
+	@JsonManagedReference("cookbook-key-link")
     private List<Cookbook_Recipe> cookbookRecipes;
     
 }
