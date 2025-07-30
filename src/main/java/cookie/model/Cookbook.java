@@ -3,8 +3,11 @@ package cookie.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -21,12 +24,14 @@ public class Cookbook {
     private int cid;
     
     private String title;
-    private Date creation_date;
+    
+    @Column(name="creation_date")
+    private Date creationDate;
     private String description;
     
     @ManyToOne
     @JoinColumn(name="uid", nullable = true)
-    @JsonIgnore
+    @JsonBackReference
     private User user;
     
     public int getCid() {
@@ -46,11 +51,11 @@ public class Cookbook {
 	}
 
 	public Date getCreation_date() {
-		return creation_date;
+		return creationDate;
 	}
 
 	public void setCreation_date(Date creation_date) {
-		this.creation_date = creation_date;
+		this.creationDate = creation_date;
 	}
 
 	public String getDescription() {
@@ -78,6 +83,7 @@ public class Cookbook {
 	}
 
 	@OneToMany(mappedBy = "cookbook")
+	@JsonManagedReference
     private List<Cookbook_Recipe> cookbookRecipes;
     
 }

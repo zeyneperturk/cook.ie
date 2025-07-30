@@ -97,9 +97,14 @@ public class RecipeController {
     	return ResponseEntity.ok(finalSave);
     }
 	
-	@GetMapping
+	@GetMapping("/allRecipes")
 	public List<Recipe> getRecipes() {
 		return recipeService.getAllRecipes();
+	}
+	
+	@GetMapping("/latest")
+	public List<Recipe> getLatestRecipes(){
+		return recipeService.latestRecipes();
 	}
 
 }

@@ -1,5 +1,7 @@
 package cookie.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -15,11 +17,13 @@ public class Cookbook_Recipe {
 	@ManyToOne
 	@MapsId("cid")
 	@JoinColumn(name="cid")
+	@JsonBackReference
 	private Cookbook cookbook;
 	
 	@ManyToOne
 	@MapsId("rid")
 	@JoinColumn(name="rid")
+	@JsonBackReference
 	private Recipe recipe;
 
 	public Cookbook_Recipe(Cookbook cookbook, Recipe recipe) {

@@ -1,5 +1,7 @@
 package cookie.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -17,6 +19,7 @@ public class Ingredient {
 	@ManyToOne
 	@MapsId("rid")
 	@JoinColumn(name="rid")
+	@JsonBackReference
 	private Recipe recipe;
 
 	public Ingredient(String name, float quantity, String unit, Recipe recipe) {

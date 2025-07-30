@@ -3,6 +3,7 @@ import { useState } from "react";
 function CookbookForm(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [selectedRecipes, setSelectedRecipes] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,13 +35,13 @@ function CookbookForm(){
     }
 
     return(
-        <form id="cookbookForm">
+        <form id="cookbookForm" onSubmit={handleSubmit}>
             <h2>New Cookbook</h2>
             <label>Title: </label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
             <label>Description</label>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <button onSubmit={handleSubmit} type="submit">create cookbook</button>
+            <button type="submit">create cookbook</button>
         </form>
     );
 }

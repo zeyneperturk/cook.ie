@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +33,11 @@ public class User implements Serializable, UserDetails{
     private String password;
     
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Cookbook> cookbooks;
     
     @OneToMany(mappedBy="user")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Recipe> recipes;
     
 
