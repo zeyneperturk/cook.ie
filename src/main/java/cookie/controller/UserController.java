@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.naming.AuthenticationException;
 
@@ -42,14 +43,17 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping
-	public List<User> getAllUsers() {
-	   return userService.getAllUsers();
+	public List<UserDTO> getAllUsers() {
+	   return userService.getAllUsers().stream()
+			   .map(UserMapper::toDTO)
+			   .collect(Collectors.toList());
 	}
     
     @PostMapping
-    public User createUser(@RequestBody User user)
+    public UserDTO createUser(@RequestBody User user)
     {
-    	return userService.createUser(user);
+    	User u = userService.createUser(user);
+    	return UserMapper.toDTO(u);
     }
     
     @PostMapping("/login")

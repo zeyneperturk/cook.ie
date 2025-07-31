@@ -14,7 +14,7 @@ function HomeLeft(){
         .then(res => res.json())
         .then(data => setLatestCookbooks(data))
         .catch(err => console.error("Failed to fetch latest cookbooks"));
-    })
+    }, [])
 
     return(
         <div id="left">

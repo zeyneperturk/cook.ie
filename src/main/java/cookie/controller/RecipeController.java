@@ -1,5 +1,7 @@
 package cookie.controller;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.util.Date;
 import org.springframework.core.*;
 import java.util.List;
@@ -101,8 +103,10 @@ public class RecipeController {
     }
 	
 	@GetMapping("/allRecipes")
-	public List<Recipe> getRecipes() {
-		return recipeService.getAllRecipes();
+	public List<RecipeDTO> getRecipes() {
+		return recipeService.getAllRecipes().stream()
+				.map(RecipeMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping("/latest")
