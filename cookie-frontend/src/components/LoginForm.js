@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm( {onLogin}){
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       const user = {email, password};
+       const user = {username, password};
 
        if(onLogin){
-        await onLogin(email, password);
+        await onLogin(username, password);
         navigate('/home');
        }
     }
@@ -22,8 +22,8 @@ function LoginForm( {onLogin}){
             <table>
                 <tbody>
                     <tr>
-                        <td>Email:</td>
-                        <td><input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)}></input></td>
+                        <td>username:</td>
+                        <td><input type="text" name="username" value={username} onChange={(e)=>setUsername(e.target.value)}></input></td>
                     </tr>
                     <tr>
                         <td>Password:</td>

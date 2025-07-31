@@ -12,19 +12,19 @@ import Signup from "./pages/Signup";
 import NewRecipe from "./pages/NewRecipe";
 import NewCookBook from "./pages/NewCookBook";
 
- async function login(email, password) {
+ async function login(username, password) {
     const response = await fetch('http://localhost:8080/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({username, password}),
     });
 
     if(!response.ok)
     {
-      throw new Error('invalid email or password')
+      throw new Error('invalid username or password')
     }
 
     const user = await response.json();
@@ -68,10 +68,10 @@ function App() {
     })
   }, []);
 
-  async function handleLogin(email, password)
+  async function handleLogin(username, password)
   {
     try{
-      const loggedUser = await login(email, password);
+      const loggedUser = await login(username, password);
       setUser(loggedUser);
       setError(null);
       sessionStorage.setItem("user", JSON.stringify(loggedUser));

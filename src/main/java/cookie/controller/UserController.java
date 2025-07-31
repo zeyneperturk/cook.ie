@@ -61,20 +61,23 @@ public class UserController {
         
     	try {
     	UsernamePasswordAuthenticationToken authToken =
-		    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
+		    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
 
 		Authentication authentication = auth.authenticate(authToken);
 
 		SecurityContext context = SecurityContextHolder.createEmptyContext();
 		context.setAuthentication(authentication);
 		SecurityContextHolder.setContext(context);
+		
+		System.out.println(loginRequest.getUsername() + loginRequest.getPassword());
 
 		request.getSession(true).setAttribute(
 		    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
 		    context
 		);
-		String email = authentication.getName();
-		User user = userService.getUserByEmail(email);
+		String username = authentication.getName();
+		System.out.println(username);
+		User user = userService.getUserByUsername(username);
 		UserDTO dto = UserMapper.toDTO(user);
 	    request.getSession(true).setAttribute("user", dto);
 
