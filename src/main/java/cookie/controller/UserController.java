@@ -72,7 +72,7 @@ public class UserController {
 		
 		User user = (User) authentication.getPrincipal();
 		UserDTO dto = UserMapper.toDTO(user);
-	    request.getSession(true).setAttribute("user", user);
+	    request.getSession(true).setAttribute("user", dto);
 
 		return ResponseEntity.ok(dto);
     	}catch(Exception e){
@@ -84,11 +84,10 @@ public class UserController {
     @GetMapping("/session")
     public ResponseEntity<?> getCurrentUser(HttpSession session)
     {
-    	User user = (User) session.getAttribute("user");
-    	if(user==null)
+    	UserDTO dto = (UserDTO) session.getAttribute("user");
+    	if(dto==null)
     		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Not logged in"));
-    	
-    	UserDTO dto = UserMapper.toDTO(user);
+
     	return ResponseEntity.ok(dto);
     }
     

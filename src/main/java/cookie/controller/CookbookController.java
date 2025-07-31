@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cookbooks")
@@ -31,8 +32,9 @@ public class CookbookController {
 	private UserService userService;
 	
 	@GetMapping
-	public List<Cookbook> getAllCookbooks() {
-	   return cookbookService.getAllCookbooks();
+	public List<CookbookDTO> getAllCookbooks() {
+		List<Cookbook> cbs = cookbookService.getAllCookbooks();
+	   return cbs.stream().map(CookbookMapper ::toDTO).collect(Collectors.toList());
 	}
 
     @PostMapping
