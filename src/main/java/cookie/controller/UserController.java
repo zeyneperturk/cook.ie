@@ -73,8 +73,8 @@ public class UserController {
 		    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
 		    context
 		);
-		
-		User user = (User) authentication.getPrincipal();
+		String email = authentication.getName();
+		User user = userService.getUserByEmail(email);
 		UserDTO dto = UserMapper.toDTO(user);
 	    request.getSession(true).setAttribute("user", dto);
 
