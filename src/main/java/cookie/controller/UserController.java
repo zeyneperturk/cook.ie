@@ -1,6 +1,8 @@
 package cookie.controller;
 
 import cookie.dto.LoginRequest;
+import cookie.dto.UserDTO;
+import cookie.mapper.UserMapper;
 import cookie.model.User;
 import cookie.repository.UserRepository;
 import cookie.service.UserService;
@@ -69,9 +71,10 @@ public class UserController {
 		);
 		
 		User user = (User) authentication.getPrincipal();
+		UserDTO dto = UserMapper.toDTO(user);
 	    request.getSession(true).setAttribute("user", user);
 
-		return ResponseEntity.ok(user);
+		return ResponseEntity.ok(dto);
     	}catch(Exception e){
     		e.printStackTrace();
     		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
@@ -84,7 +87,9 @@ public class UserController {
     	User user = (User) session.getAttribute("user");
     	if(user==null)
     		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Not logged in"));
-    	return ResponseEntity.ok(user);
+    	
+    	UserDTO dto = UserMapper.toDTO(user);
+    	return ResponseEntity.ok(dto);
     }
     
     @PostMapping("/logout")

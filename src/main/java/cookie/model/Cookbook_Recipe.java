@@ -1,6 +1,7 @@
 package cookie.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.MapsId;
 public class Cookbook_Recipe {
 	
 	@EmbeddedId
+	@JsonIgnore
 	private KeyCookbook_Recipe id;
 	
 	@ManyToOne

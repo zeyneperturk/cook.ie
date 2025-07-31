@@ -1,5 +1,7 @@
 package cookie.controller;
 
+import cookie.dto.CookbookDTO;
+import cookie.mapper.CookbookMapper;
 import cookie.model.Cookbook;
 import cookie.model.Recipe;
 import cookie.model.User;
@@ -46,7 +48,8 @@ public class CookbookController {
 	
 		cookbook.setUser(user);
 		cookbookService.createCookbook(cookbook);
-    	return ResponseEntity.ok(cookbook);
+		CookbookDTO dto = CookbookMapper.toDTO(cookbook);
+		return ResponseEntity.ok(dto);
     }
     
     @GetMapping("/latest")

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cookie.dto.RecipeDTO;
+import cookie.mapper.RecipeMapper;
 import cookie.model.Ingredient;
 import cookie.model.Instruction;
 import cookie.model.KeyIngredient;
@@ -45,7 +47,7 @@ public class RecipeController {
 	private UserService userService;
 	
 	@PostMapping
-    public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe)
+    public ResponseEntity<RecipeDTO> createRecipe(@RequestBody Recipe recipe)
     {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(auth.getPrincipal());
@@ -93,8 +95,8 @@ public class RecipeController {
 		}
 		
 		Recipe finalSave = recipeService.createRecipe(save);
-		
-    	return ResponseEntity.ok(finalSave);
+		RecipeDTO dto = RecipeMapper.toDTO(finalSave);
+    	return ResponseEntity.ok(dto);
     }
 	
 	@GetMapping("/allRecipes")
