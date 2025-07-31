@@ -3,6 +3,7 @@ package cookie.controller;
 import java.util.Date;
 import org.springframework.core.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,8 +106,9 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/latest")
-	public List<Recipe> getLatestRecipes(){
-		return recipeService.latestRecipes();
+	public List<RecipeDTO> getLatestRecipes(){
+		List<Recipe> latest = recipeService.latestRecipes();
+		return latest.stream().map(RecipeMapper::toDTO).collect(Collectors.toList());
 	}
 
 }
