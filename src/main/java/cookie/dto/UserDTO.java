@@ -1,6 +1,8 @@
 package cookie.dto;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable{
 	private int uid;
 	private String first_name;
 	private String last_name;

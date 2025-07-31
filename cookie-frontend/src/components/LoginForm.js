@@ -10,6 +10,8 @@ function LoginForm( {onLogin}){
         e.preventDefault();
        const user = {username, password};
 
+       console.log(user);
+
        if(onLogin){
         await onLogin(username, password);
         navigate('/home');
