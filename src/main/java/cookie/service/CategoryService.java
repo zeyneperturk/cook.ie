@@ -27,8 +27,11 @@ public class CategoryService {
 	}
 
 	public List<CategoryDTO> popularCategories(){
+		System.out.println("test");
 		List<Category> all = categoryRepository.findAll();
+		System.out.println("test");
 		Collections.shuffle(all);
+		System.out.println("test");
 		System.out.println(all);
 		return all.stream().limit(5).map(CategoryMapper::toDTO).collect(Collectors.toList());
 	}
