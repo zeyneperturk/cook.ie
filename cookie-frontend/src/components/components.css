@@ -10,7 +10,7 @@
 }
 
 #header h1{
-    font-size: 3rem;
+    font-size: 4.5vw;
     font-weight: 700;
     margin: 0;
     flex: 4;
@@ -27,17 +27,17 @@
 #header input{
     flex: 5;
     height: 24px;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
+    border: 1px solid grey;
+    border-radius: 0.5em;
 }
 
 #header #nav{
     flex: 4;
     text-align: center;
     display: flex;
-    gap: 50px;
+    gap: 3vw;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
 }
 
 #header #nav a{
@@ -51,7 +51,7 @@
 
 #header #nav div{
     display: flex;
-    gap: 50px;
+    gap: 3vw;
 }
 
 /* login form */
@@ -109,6 +109,7 @@
     width: 450px;
     padding: 25px;
     border: 1px solid lightgrey;
+    background: white;
     border-radius: 18px;
     display: flex;
     flex-direction: column;
@@ -127,6 +128,8 @@
     position: relative;
     display: inline-block;
 }
+
+/* profile menu */
 
 #profileMenu{
     display: none !important;
@@ -148,4 +151,75 @@
 
 #profileContainer:hover #profileMenu, #createContainer:hover #createMenu{
     display: block !important;
+}
+
+/* cookbook form */
+
+#cookbookForm{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 2em;
+    background-color: white;
+}
+
+#cookbookForm h2{
+    padding-left: 1em;
+}
+
+#cookbookForm #fields{
+    margin: 2em;
+}
+
+#cookbookForm #fields label{
+    font-size:large;
+    margin-right: 1em;
+    margin-top: 1em;
+}
+
+#cookbookForm #fields input{
+    border: 1px solid brown;
+}
+
+/* article */
+article{
+    display: flex;
+}
+
+/* homeleft */
+#left{
+    display: inline-block;
+}
+
+#latestRecipes, #latestCookbooks, #popularCategories{
+    border: 1px solid gray;
+    border-radius: 1em;
+    background-color: white;
+    width: 18vw;
+    padding: 1vw;
+    margin: 2vw;
+}
+
+#latestRecipes li, #latestCookbooks li{
+    list-style-type: none;
+    padding: 5px;
+    margin: 0;
+    border: 1px solid grey;
+    margin-bottom: 1vw;
+    border-radius: 8px;
+}
+
+#latestRecipes li h4, #latestCookbooks li h4{
+    margin: 0;
+    padding: 0;
+}
+
+#latestRecipes li h4 a, #latestCookbooks li h4 a{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: black;
+}
+
+#latestRecipes li p, #latestCookbooks li p{
+    margin: 7px 0;
 }

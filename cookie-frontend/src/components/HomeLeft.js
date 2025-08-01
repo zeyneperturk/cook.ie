@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import {format} from 'date-fns';
+import { Link } from "react-router-dom";
 
 function HomeLeft(){
     const [latestRecipes, setLatestRecipes] = useState([]);
@@ -22,9 +24,9 @@ function HomeLeft(){
                 <h3>latest recipes</h3>
                 {latestRecipes.map((recipe)=>(
                     <li key="{recipe.rid}">
-                        <h4>{recipe.title}</h4>
+                        <h4><Link>{recipe.title}</Link></h4>
                         <p>{recipe.description}</p>
-                        <span>{recipe.creation_date}</span>
+                        <span>{format(new Date(recipe.creation_date), 'MMM dd, yyyy')}</span>
                     </li>
                 ))}
             </div>
@@ -32,7 +34,7 @@ function HomeLeft(){
                 <h3>latest cookbooks</h3>
                 {latestCookbooks.map((cookbook)=>(
                     <li key="{cookbook.cid}">
-                        <h4>{cookbook.title}</h4>
+                        <h4><Link>{cookbook.title}</Link></h4>
                         <p>{cookbook.description}</p>
                     </li>
                 ))}

@@ -37,11 +37,15 @@ function CookbookForm(){
     return(
         <form id="cookbookForm" onSubmit={handleSubmit}>
             <h2>New Cookbook</h2>
-            <label>Title: </label>
+            <div id="fields">
+            <label>Cookbook Title: </label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <br></br>
             <label>Description</label>
+            <br></br>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
             <button type="submit">create cookbook</button>
+            </div>
         </form>
     );
 }

@@ -1,10 +1,14 @@
 package cookie.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cookie.dto.CategoryDTO;
+import cookie.mapper.CategoryMapper;
 import cookie.model.Category;
 import cookie.repository.CategoryRepository;
 
@@ -22,4 +26,10 @@ public class CategoryService {
 		return categoryRepository.save(category);
 	}
 
+	public List<CategoryDTO> popularCategories(){
+		List<Category> all = categoryRepository.findAll();
+		Collections.shuffle(all);
+		System.out.println(all);
+		return all.stream().limit(5).map(CategoryMapper::toDTO).collect(Collectors.toList());
+	}
 }
