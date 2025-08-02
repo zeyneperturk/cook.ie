@@ -25,4 +25,8 @@ public class RecipeService {
 	public List<Recipe> latestRecipes(){
 		return recipeRepository.findTop5ByOrderByCreationDateDesc();
 	}
+	
+	public List<Recipe> recommendedRecipesForCookbok(){
+		return recipeRepository.recommendedRecipes();
+	}
 }

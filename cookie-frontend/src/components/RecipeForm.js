@@ -1,4 +1,6 @@
 import { useState } from "react";
+import addIcon from '../img/add.svg';
+import removeIcon from '../img/remove.svg';
 
 function RecipeForm(){
 
@@ -107,46 +109,66 @@ function RecipeForm(){
     return(
         <form id="recipeForm">
             <h2>New Recipe</h2>
-            <span>Recipe Title:</span>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-            <span>Description: </span>
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <input placeholder="Recipe Title" id="recipeTitle" type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <br></br>
+            <span id="descLabel">Description: </span>
+            <br></br>
+            <textarea id="recipeDescription" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
+            <div id="otherInfo">
             <div id="ingredients">
             
-                <h3>Ingredients</h3>
+                
+                <div class="ins-section">
+                    <h3>Ingredients</h3>
+                <div class="scroll-container">
                 {
                     ingredients.map((ing, idx)=>(
-                        <div key={idx}>
-                            <label>Name: </label>
-                            <input type="text" value={ing.id?.name || ""} onChange={(e)=>ingredientChange(idx, "id.name", e.target.value)}></input>
-                            <label>Quantity: </label>
-                            <input type="text" value={ing.quantity} onChange={(e)=>ingredientChange(idx, "quantity", e.target.value)}></input>
-                            <label>Unit</label>
-                            <input type="text" value={ing.unit} onChange={(e)=>ingredientChange(idx, "unit", e.target.value)}></input>
+                        <div key={idx} class="ingredient">
+                            <input placeholder="Ingredient Name"class="ingName" type="text" value={ing.id?.name || ""} onChange={(e)=>ingredientChange(idx, "id.name", e.target.value)}></input>
+                            <br></br>
+                            <input placeholder="Quantity" class="ingQuantity" type="number" value={ing.quantity} onChange={(e)=>ingredientChange(idx, "quantity", e.target.value)}></input>
+                            <input placeholder="Unit" class="ingUnit" type="text" value={ing.unit} onChange={(e)=>ingredientChange(idx, "unit", e.target.value)}></input>
+                            <hr></hr>
                         </div>
+                        
                     ))
                 }
+                </div>
+                </div>
 
-                <button type="button" onClick={addIngredient}>add ingredient</button>
-                <button type="button" onClick={removeIngredient}>remove ingredient</button>
+                <div class="button-container">
+                <div class="buttons">
+                    <button class="add" type="button" onClick={addIngredient}>Add Ingredient</button>
+                    <button class="remove" type="button" onClick={removeIngredient}>Remove Ingredient</button>
+                </div>
+                     </div>
             </div>
 
-            <div>
-                <h3>Instructions</h3>
+            <div id="instructions">
+                
+                <div class="ins-section">
+                    <h3>Instructions</h3>
+                <div class="scroll-container">
                 {
                     instructions.map((step, idx)=>(
-                        <div key={idx}>
-                            <label>{idx + 1}</label>
-                            <textarea value={step.text} onChange={(e)=>stepChange(idx, "text", e.target.value)}></textarea>
+                        <div key={idx} class="instruction">
+                            <label>Step {idx + 1})</label><br></br>
+                            <textarea class="step" value={step.text} onChange={(e)=>stepChange(idx, "text", e.target.value)}></textarea>
                         </div>
                     ))
                 }
-                <button type="button" onClick={addStep}>add step</button>
-                <button type="button" onClick={removeStep}>remove step</button>
-            </div>
+                </div>
 
-            <button onClick={handleSubmit} type="submit">create recipe</button>
+                
+                <div class="buttons">
+                    <button class="add" type="button" onClick={addStep}>Add Step</button>
+                    <button class="remove" type="button" onClick={removeStep}>Remove Step</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <button id="submit" onClick={handleSubmit} type="submit">Create Recipe</button>
             
         </form>   
     )

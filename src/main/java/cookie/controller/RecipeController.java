@@ -53,7 +53,6 @@ public class RecipeController {
     public ResponseEntity<RecipeDTO> createRecipe(@RequestBody Recipe recipe)
     {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth.getPrincipal());
 		
 		if(auth == null || !auth.isAuthenticated())
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -72,10 +71,7 @@ public class RecipeController {
 		
 		Recipe save = recipeService.createRecipe(recipe);
 		
-		System.out.println(ing);
-		System.out.println(ins);
-		System.out.println(save);
-		
+
 		if(ing!=null)
 		{
 			for(Ingredient val : ing)
@@ -114,5 +110,10 @@ public class RecipeController {
 		List<Recipe> latest = recipeService.latestRecipes();
 		return latest.stream().map(RecipeMapper::toDTO).collect(Collectors.toList());
 	}
-
+	
+	@GetMapping("/recommendedForCookbook")
+	public List<RecipeDTO> recommendedRecipes(){
+		List<Recipe> recommended = recipeService.recommendedRecipesForCookbok();
+		return recommended.stream().map(RecipeMapper::toDTO).collect(Collectors.toList());
+	}
 }

@@ -15,9 +15,9 @@ function HomeRight(){
         <div id="right">
             <div id="popularCategories">
                 <h3>popular categories</h3>
-                {categories.map((cookbook)=>(
+                {categories.map((categories)=>(
                     <li key="{categories.cid}">
-                        <h4><Link>{categories.name}</Link></h4>
+                        <Link>{categories.name}</Link>
                     </li>
                 ))}
             </div>

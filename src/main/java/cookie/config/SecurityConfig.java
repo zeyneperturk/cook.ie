@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .requestMatchers("/users/**").permitAll()
                 .requestMatchers("/recipes/**").permitAll()
                 .requestMatchers("/cookbooks/**").permitAll()
+                .requestMatchers("/categories/**").permitAll()
                 .anyRequest().authenticated()
             )
             .csrf(csrf -> csrf.disable())       

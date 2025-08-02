@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HomeLeft from '../components/HomeLeft';
 import HomeRight from '../components/HomeRight';
+import HomeMain from '../components/HomeMain';
 
 function Home({onLogout}){
     return(
@@ -9,9 +10,7 @@ function Home({onLogout}){
             <Header onLogout={onLogout}/>
             <article>
                 <HomeLeft/>
-                <div id="main">
-
-                </div>
+                <HomeMain/>
                 <HomeRight/>
             </article>
             <Footer />

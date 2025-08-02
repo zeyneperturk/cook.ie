@@ -17,7 +17,7 @@ import cookie.service.CategoryService;
 public class CategoryController {
 	
 	@Autowired
-	private CategoryService categoryService = new CategoryService();
+	private CategoryService categoryService;
 	
 	@GetMapping("/popularCategories")
 	public List<CategoryDTO> getCategories(){

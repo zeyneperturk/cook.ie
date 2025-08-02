@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+
+button {
+    cursor: pointer;
+}
 
 /* header */
 
@@ -57,6 +61,7 @@
 /* login form */
 
 #loginForm{
+    background-color: white;
     font-family: Nunito;
     margin: 100px auto;
     width: 300px;
@@ -153,31 +158,197 @@
     display: block !important;
 }
 
+/* recipe form */
+
+#recipeForm{
+    border: 1px solid gray;
+    border-radius: 1em;
+    background-color: white;
+    min-width: 350px;
+    width: 60vw;
+    margin: 0 auto;
+    padding: 1em;
+    font-family: nunito;
+}
+
+#recipeForm h3{
+    width: fit-content;
+}
+
+#recipeForm #recipeTitle{
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: large;
+    margin-bottom: 1em;
+    min-width: 300px;
+    width: 25vw;
+    font-family: quicksand;
+}
+
+#recipeForm #descLabel{
+    font-size: large;
+    font-family: nunito;
+}
+
+#recipeForm #recipeDescription{
+    resize:none;
+    width: 40vw;
+    margin-top: 0.5em;
+    border: 1px solid gray;
+    border-radius: 0.4em;
+    min-width: 300px;
+    height: 100px;
+    font-family: quicksand;
+}
+
+#otherInfo{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+#ingredients, #instructions{
+    flex: 1 1 300px;
+    width: max-content;
+}
+
+#recipeForm .ingredient, #recipeForm .instruction{
+    margin: 20px 0;
+    min-width: 300px;
+    width: 25vw;
+}
+
+#recipeForm .ingredient input{
+    border: none;
+    border-bottom: 1px solid gray;
+    margin: 1em;
+}
+
+#recipeForm .ingQuantity{
+    width: 75px;
+}
+
+#recipeForm .ingName{
+    width: 180px;
+}
+
+#recipeForm .ingUnit{
+    width: 75px;
+}
+
+#recipeForm .step{
+    resize:none;
+    margin-top: 0.5em;
+    border: 1px solid gray;
+    border-radius: 0.4em;
+    min-width: 300px;
+    max-width: 100%;
+    height: 60px;
+    font-family: quicksand;
+}
+
+#recipeForm .scroll-container{
+    width: max-content;
+    border: 1px solid gray;
+    max-height: 325px;
+    overflow-y: auto;
+    border-radius: 0.5em;
+    padding: 1rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 1em auto;
+    width: 100%; /* Ensures it spans full container width */
+    max-width: 600px;
+}
+
+.buttons .add{
+    background-color: rgb(179, 243, 179);
+    padding: 5px;
+    border: 2px solid rgb(107, 184, 107);
+    border-radius: 1em;
+}
+
+.buttons .remove{
+    background-color: rgb(243, 189, 179);
+    padding: 5px;
+    border: 2px solid rgb(184, 116, 107);
+    border-radius: 1em;
+}
+
+#recipeForm #submit{
+    display: block;
+    margin: 2em auto 0 auto;
+    border-radius: 1em;
+    padding: 5px;
+    background-color: rgb(198, 229, 240);
+    border: 2px solid rgb(120, 146, 204);
+    max-width: 200px;
+    width: 100%;
+}
+
+.ing-section, .ins-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers child elements */
+    width: max-content;  /* shrink to content size (like scroll-container) */
+    margin: 0 auto;
+}
+
+#recipeForm img{
+    width:15px;
+}
+
 /* cookbook form */
 
 #cookbookForm{
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    margin: 2em;
+    border: 1px solid gray;
+    border-radius: 1em;
     background-color: white;
+    min-width: 350px;
+    width: 60vw;
+    margin: 0 auto;
+    padding: 1em;
+    font-family: nunito;
 }
 
-#cookbookForm h2{
-    padding-left: 1em;
+#cookbookForm #cookbookTitle{
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: large;
+    margin-bottom: 1em;
+    min-width: 300px;
+    width: 25vw;
+    font-family: quicksand;
 }
 
-#cookbookForm #fields{
-    margin: 2em;
+#cookbookForm #descLabel{
+    font-size: large;
+    font-family: nunito;
 }
 
-#cookbookForm #fields label{
-    font-size:large;
-    margin-right: 1em;
-    margin-top: 1em;
+#cookbookForm #cookbookDesc{
+    resize:none;
+    width: 40vw;
+    margin-top: 0.5em;
+    border: 1px solid gray;
+    border-radius: 0.4em;
+    min-width: 300px;
+    height: 100px;
+    font-family: quicksand;
 }
 
-#cookbookForm #fields input{
-    border: 1px solid brown;
+#cookbookForm #submit{
+    display: block;
+    margin: 2em auto 0 auto;
+    border-radius: 1em;
+    padding: 5px;
+    background-color: rgb(198, 229, 240);
+    border: 2px solid rgb(120, 146, 204);
+    max-width: 200px;
+    width: 100%;
 }
 
 /* article */
@@ -222,4 +393,19 @@ article{
 
 #latestRecipes li p, #latestCookbooks li p{
     margin: 7px 0;
+}
+
+#popularCategories li{
+    list-style-type: none;
+}
+
+#popularCategories li a{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+#homeMain{
+    width: 100%;
 }

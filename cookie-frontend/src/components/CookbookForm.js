@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CookbookForm(){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [selectedRecipes, setSelectedRecipes] = useState("");
+    const [recommendedRecipes, setRecommendedRecipes] = useState("");
+
+    useEffect(()=>{
+            fetch("http://localhost:8080/recipes/recommendedForCookbook")
+            .then(res => res.json())
+            .then(data => setRecommendedRecipes(data))
+            .catch(err => console.error("Failed to fetch recommendations."));
+        },[]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,18 +42,24 @@ function CookbookForm(){
     }
 
     return(
+        <div>
         <form id="cookbookForm" onSubmit={handleSubmit}>
             <h2>New Cookbook</h2>
             <div id="fields">
-            <label>Cookbook Title: </label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <input placeholder="Cookbook Title" id="cookbookTitle" type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <br></br> 
+            <label id="descLabel">Description</label>
             <br></br>
-            <label>Description</label>
-            <br></br>
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <button type="submit">create cookbook</button>
+            <textarea id="cookbookDesc" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <br/>
+            <button id="submit" type="submit">create cookbook</button>
             </div>
         </form>
+
+        <div>
+
+        </div>
+                </div>
     );
 }
 
