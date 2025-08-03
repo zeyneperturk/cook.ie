@@ -27,6 +27,10 @@ public class Cookbook_Recipe {
 	@JoinColumn(name="rid")
 	@JsonBackReference("recipe-key-link")
 	private Recipe recipe;
+	
+	public Cookbook_Recipe() {
+		
+	}
 
 	public Cookbook_Recipe(Cookbook cookbook, Recipe recipe) {
 		this.cookbook = cookbook;

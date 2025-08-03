@@ -23,7 +23,7 @@ function HomeLeft(){
             <div id="latestRecipes">
                 <h3>latest recipes</h3>
                 {latestRecipes.map((recipe)=>(
-                    <li key="{recipe.rid}">
+                    <li key={recipe.rid}>
                         <h4><Link>{recipe.title}</Link></h4>
                         <p>{recipe.description}</p>
                         <span>{format(new Date(recipe.creation_date), 'MMM dd, yyyy')}</span>
@@ -33,7 +33,7 @@ function HomeLeft(){
             <div id="latestCookbooks">
                 <h3>latest cookbooks</h3>
                 {latestCookbooks.map((cookbook)=>(
-                    <li key="{cookbook.cid}">
+                    <li key={cookbook.cid}>
                         <h4><Link>{cookbook.title}</Link></h4>
                         <p>{cookbook.description}</p>
                     </li>

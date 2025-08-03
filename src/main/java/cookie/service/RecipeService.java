@@ -1,6 +1,7 @@
 package cookie.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,9 @@ public class RecipeService {
 	
 	public List<Recipe> recommendedRecipesForCookbok(){
 		return recipeRepository.recommendedRecipes();
+	}
+	
+	public Optional<Recipe> findById(int rid) {
+		return recipeRepository.findById(rid);
 	}
 }
