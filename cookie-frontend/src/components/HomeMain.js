@@ -22,8 +22,8 @@ function HomeMain(){
                 const recipesData = await recipesRes.json();
                 const cookbooksData = await cookbooksRes.json();
 
-                setUsersRecipes(recipesData);
-                setUsersCookbooks(cookbooksData);
+                setUsersRecipes(recipesData || []);
+                setUsersCookbooks(cookbooksData || []);
             }catch(error){
                 console.error("failed to fetch user content", error);
             }
@@ -44,13 +44,29 @@ function HomeMain(){
                     <div id="userRecipes">
                         <h3>your recipes</h3>
                         <div class="list">
-
+                            {Array.isArray(usersRecipes) && usersRecipes.length > 0 ?(
+                                <p>you don't have any recipes yet!</p>
+                            ) : (
+                                <ul>
+                                    {usersRecipes.map((recipe) =>(
+                                        <li key={recipe.rid}>{recipe.title}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                     <div id="userCookbooks">
                         <h3>your cookbooks</h3>
                         <div class="list">
-                            
+                            {Array.isArray(usersCookbooks) && usersCookbooks.length > 0 ?(
+                                <p>you don't have any cookbooks yet!</p>
+                            ) : (
+                                <ul>
+                                    {usersCookbooks.map((cookbook) =>(
+                                        <li key={cookbook.cid}>{cookbook.title}</li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                 </div> : 

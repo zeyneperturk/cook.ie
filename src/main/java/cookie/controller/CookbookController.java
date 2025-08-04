@@ -81,8 +81,8 @@ public class CookbookController {
 		return latest.stream().map(CookbookMapper::toDTO).collect(Collectors.toList());
 	}
     
-    @GetMapping("/usersLatestCookbooks")
-    public List<CookbookDTO> usersLatestCookbooks(int uid){
+    @GetMapping("/usersLatestCookbooks/{uid}")
+    public List<CookbookDTO> usersLatestCookbooks(@PathVariable int uid){
     	return cookbookService.usersLatestCookbooks(uid).stream().map(CookbookMapper::toDTO).collect(Collectors.toList());
     }
 }
