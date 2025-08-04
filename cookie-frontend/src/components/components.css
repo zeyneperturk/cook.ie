@@ -140,6 +140,7 @@ button {
     display: none !important;
     position: absolute;
     border: 1px solid lightgrey;
+    background-color: white;
     border-radius: 5px;
     padding: 10px;
     top: 100%;
@@ -147,10 +148,15 @@ button {
     z-index: 100;
 }
 
+#profileMenu li, #createMenu li{
+    list-style-type: none;
+}
+
 #createMenu{
     display: none !important;
     position: absolute;
     border: 1px solid lightgray;
+    background-color: white;
     border-radius: 5px;
 }
 
@@ -359,6 +365,7 @@ article{
 /* homeleft */
 #left{
     display: inline-block;
+    font-family: quicksand;
 }
 
 #latestRecipes, #latestCookbooks, #popularCategories{
@@ -395,8 +402,15 @@ article{
     margin: 7px 0;
 }
 
+/* home right */
+
+#popularCategories{
+    font-family: quicksand;
+}
+
 #popularCategories li{
     list-style-type: none;
+
 }
 
 #popularCategories li a{
@@ -406,6 +420,25 @@ article{
     color: black;
 }
 
+/* home main */
+
 #homeMain{
+    border: 1px solid gray;
+    border-radius: 1em;
+    background-color: white;
     width: 100%;
+    padding: 1vw;
+    margin: 2vw;
+    font-family: quicksand;
+}
+
+#userRecipes, #userCookbooks{
+    border: 1px solid gray;
+    border-radius: 1em;
+    margin: 1em 0;
+}
+
+#userRecipes h3, #userCookbooks h3{
+    margin: 0;
+    padding: 5px;
 }

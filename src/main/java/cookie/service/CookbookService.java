@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import cookie.model.Cookbook;
 import cookie.model.Recipe;
+import cookie.model.User;
 import cookie.repository.CookbookRepository;
 
 @Service
 public class CookbookService {
 	@Autowired
 	private CookbookRepository cookbookRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	public List<Cookbook> getAllCookbooks(){
 		return cookbookRepository.findAll();
@@ -28,5 +32,10 @@ public class CookbookService {
 
 	public List<Cookbook> latestCookbooks() {
 		return cookbookRepository.findTop5ByOrderByCreationDateDesc();
+	}
+	
+	public List<Cookbook> usersLatestCookbooks(int uid){
+		User user = userService.getUserByUid(uid);
+		return cookbookRepository.findTop5ByUserOrderByCreationDateDesc(user);
 	}
 }

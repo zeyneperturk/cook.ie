@@ -1,6 +1,7 @@
 package cookie.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +38,10 @@ public class UserService implements UserDetailsService{
 	public User getUserByUsername(String username)
 	{
 		return userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("User not found"));
+	}
+	
+	public User getUserByUid(int uid) {
+		return userRepository.findByUid(uid).orElseThrow(()-> new UsernameNotFoundException("User not found"));
 	}
 
 	@Override

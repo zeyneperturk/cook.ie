@@ -13,7 +13,6 @@ import jakarta.persistence.MapsId;
 public class Instruction {
 	
 	@EmbeddedId
-	@JsonIgnore
 	private KeyInstruction id;
 	
 	private String text;

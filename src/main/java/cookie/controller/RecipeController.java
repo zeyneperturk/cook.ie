@@ -76,6 +76,10 @@ public class RecipeController {
 		{
 			for(Ingredient val : ing)
 			{
+				System.out.println(val.getId().getName());
+				System.out.println(val.getId().getRid());
+				System.out.println(val.getQuantity());
+				System.out.println(val.getUnit());
 				val.setRecipe(save);
 				val.setId(new KeyIngredient(save.getRid(), val.getId().getName()));
 				ingRepository.save(val);
@@ -87,14 +91,17 @@ public class RecipeController {
 		{
 			for(Instruction val : ins)
 			{
+				System.out.println(val.getId().getStep_num());
+				System.out.println(val.getId().getRid());
+				System.out.println(val.getText());
 				val.setRecipe(save);
 				val.setId(new KeyInstruction(val.getId().getStep_num(), save.getRid()));
 				insRepository.save(val);
 			}
 		}
 		
-		Recipe finalSave = recipeService.createRecipe(save);
-		RecipeDTO dto = RecipeMapper.toDTO(finalSave);
+		//Recipe finalSave = recipeService.createRecipe(save);
+		RecipeDTO dto = RecipeMapper.toDTO(save);
     	return ResponseEntity.ok(dto);
     }
 	
@@ -115,5 +122,10 @@ public class RecipeController {
 	public List<RecipeDTO> recommendedRecipes(){
 		List<Recipe> recommended = recipeService.recommendedRecipesForCookbok();
 		return recommended.stream().map(RecipeMapper::toDTO).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/usersLatestRecipes")
+	public List<RecipeDTO> usersLatestRecipes(int uid){
+		return recipeService.usersLatestRecipes(uid).stream().map(RecipeMapper::toDTO).collect(Collectors.toList());
 	}
 }

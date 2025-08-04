@@ -13,7 +13,6 @@ import jakarta.persistence.MapsId;
 public class Ingredient {
 	
 	@EmbeddedId
-	@JsonIgnore
 	private KeyIngredient id;
 	private float quantity;
 	private String unit;
