@@ -44,7 +44,7 @@ function HomeMain(){
                     <div id="userRecipes">
                         <h3>your recipes</h3>
                         <div class="list">
-                            {Array.isArray(usersRecipes) && usersRecipes.length > 0 ?(
+                            {!Array.isArray(usersRecipes) && usersRecipes.length === 0 ?(
                                 <p>you don't have any recipes yet!</p>
                             ) : (
                                 <ul>
@@ -58,7 +58,7 @@ function HomeMain(){
                     <div id="userCookbooks">
                         <h3>your cookbooks</h3>
                         <div class="list">
-                            {Array.isArray(usersCookbooks) && usersCookbooks.length > 0 ?(
+                             {/* {!Array.isArray(usersCookbooks) && usersCookbooks.length === 0 ?(
                                 <p>you don't have any cookbooks yet!</p>
                             ) : (
                                 <ul>
@@ -66,7 +66,7 @@ function HomeMain(){
                                         <li key={cookbook.cid}>{cookbook.title}</li>
                                     ))}
                                 </ul>
-                            )}
+                            )}    */}
                         </div>
                     </div>
                 </div> : 
