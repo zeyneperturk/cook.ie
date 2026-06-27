@@ -13,6 +13,7 @@ public class HttpSessionConfig {
 		serializer.setCookieName("JSESSIONID");
 		serializer.setSameSite("Lax");
 		serializer.setUseHttpOnlyCookie(true);
+		// Must be set to true in production (HTTPS); false only so the cookie works over http://localhost in dev.
 		serializer.setUseSecureCookie(false);
 		serializer.setCookieMaxAge(1800);
 		return serializer;

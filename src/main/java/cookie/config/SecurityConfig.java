@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +25,9 @@ public class SecurityConfig {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .securityMatcher("/**")
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/users/**").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users", "/users/login", "/users/logout").permitAll()
+                .requestMatchers(HttpMethod.GET, "/users/session").permitAll()
                 .requestMatchers("/recipes/**").permitAll()
                 .requestMatchers("/cookbooks/**").permitAll()
                 .requestMatchers("/categories/**").permitAll()

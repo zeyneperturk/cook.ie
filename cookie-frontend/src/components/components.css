@@ -24,15 +24,25 @@ button {
 #header h1 a{
     font-family: Nunito;
     text-decoration: none;
-    color: black;
+    color: var(--color-heading);
     display:inline-block;
 }
 
 #header input{
     flex: 5;
     height: 24px;
-    border: 1px solid grey;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
     border-radius: 0.5em;
+    font-family: quicksand;
+    padding: 0 0.6em;
+    color: var(--color-text);
+}
+
+#header input:focus{
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--peach-100);
 }
 
 #header #nav{
@@ -50,7 +60,12 @@ button {
     font-family:Nunito;
     text-align: center;
     text-decoration: none;
-    color: black;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+#header #nav a:hover{
+    color: var(--color-primary-hover);
 }
 
 #header #nav div{
@@ -61,12 +76,13 @@ button {
 /* login form */
 
 #loginForm{
-    background-color: white;
+    background-color: var(--color-surface);
     font-family: Nunito;
     margin: 100px auto;
     width: 300px;
     padding: 17px;
-    border: 1px solid lightgrey;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
     border-radius: 18px;
     display: flex;
     flex-direction: column;
@@ -95,15 +111,29 @@ button {
 }
 
 #loginForm table input, #signupForm input{
-    border: 1px solid rgb(175, 175, 175);
+    border: 1px solid var(--grey-200);
     border-radius: 8px;
+    padding: 6px 8px;
+    color: var(--color-text);
+}
+
+#loginForm table input:focus, #signupForm input:focus{
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--peach-100);
 }
 
 #loginForm table button, #signupForm button{
-    border: 1px solid rgb(175, 175, 175);
+    border: none;
     border-radius: 25px;
-    background-color: white;
-    padding: 7px 10px;
+    background-color: var(--color-primary);
+    color: var(--peach-50);
+    font-weight: 600;
+    padding: 7px 14px;
+}
+
+#loginForm table button:hover, #signupForm button:hover{
+    background-color: var(--color-primary-hover);
 }
 
 /* sign up */
@@ -113,8 +143,9 @@ button {
     margin: 100px auto;
     width: 450px;
     padding: 25px;
-    border: 1px solid lightgrey;
-    background: white;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+    background: var(--color-surface);
     border-radius: 18px;
     display: flex;
     flex-direction: column;
@@ -139,8 +170,9 @@ button {
 #profileMenu{
     display: none !important;
     position: absolute;
-    border: 1px solid lightgrey;
-    background-color: white;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+    background-color: var(--color-surface);
     border-radius: 5px;
     padding: 10px;
     top: 100%;
@@ -155,8 +187,9 @@ button {
 #createMenu{
     display: none !important;
     position: absolute;
-    border: 1px solid lightgray;
-    background-color: white;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+    background-color: var(--color-surface);
     border-radius: 5px;
 }
 
@@ -167,9 +200,10 @@ button {
 /* recipe form */
 
 #recipeForm{
-    border: 1px solid gray;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
     border-radius: 1em;
-    background-color: white;
+    background-color: var(--color-surface);
     min-width: 350px;
     width: 60vw;
     margin: 0 auto;
@@ -183,7 +217,7 @@ button {
 
 #recipeForm #recipeTitle{
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--grey-200);
     font-size: large;
     margin-bottom: 1em;
     min-width: 300px;
@@ -200,7 +234,7 @@ button {
     resize:none;
     width: 40vw;
     margin-top: 0.5em;
-    border: 1px solid gray;
+    border: 1px solid var(--grey-200);
     border-radius: 0.4em;
     min-width: 300px;
     height: 100px;
@@ -225,7 +259,7 @@ button {
 
 #recipeForm .ingredient input{
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--grey-200);
     margin: 1em;
 }
 
@@ -244,7 +278,7 @@ button {
 #recipeForm .step{
     resize:none;
     margin-top: 0.5em;
-    border: 1px solid gray;
+    border: 1px solid var(--grey-200);
     border-radius: 0.4em;
     min-width: 300px;
     max-width: 100%;
@@ -254,7 +288,7 @@ button {
 
 #recipeForm .scroll-container{
     width: max-content;
-    border: 1px solid gray;
+    border: 1px solid var(--grey-200);
     max-height: 325px;
     overflow-y: auto;
     border-radius: 0.5em;
@@ -271,28 +305,46 @@ button {
 }
 
 .buttons .add{
-    background-color: rgb(179, 243, 179);
-    padding: 5px;
-    border: 2px solid rgb(107, 184, 107);
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    padding: 5px 12px;
+    border: 2px solid var(--success);
     border-radius: 1em;
 }
 
+.buttons .add:hover{
+    background-color: var(--success);
+    color: var(--peach-50);
+}
+
 .buttons .remove{
-    background-color: rgb(243, 189, 179);
-    padding: 5px;
-    border: 2px solid rgb(184, 116, 107);
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+    padding: 5px 12px;
+    border: 2px solid var(--danger);
     border-radius: 1em;
+}
+
+.buttons .remove:hover{
+    background-color: var(--danger);
+    color: #ffffff;
 }
 
 #recipeForm #submit{
     display: block;
     margin: 2em auto 0 auto;
     border-radius: 1em;
-    padding: 5px;
-    background-color: rgb(198, 229, 240);
-    border: 2px solid rgb(120, 146, 204);
+    padding: 8px;
+    background-color: var(--color-primary);
+    color: var(--peach-50);
+    font-weight: 600;
+    border: none;
     max-width: 200px;
     width: 100%;
+}
+
+#recipeForm #submit:hover{
+    background-color: var(--color-primary-hover);
 }
 
 .ing-section, .ins-section {
@@ -310,9 +362,10 @@ button {
 /* cookbook form */
 
 #cookbookForm{
-    border: 1px solid gray;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
     border-radius: 1em;
-    background-color: white;
+    background-color: var(--color-surface);
     min-width: 350px;
     width: 60vw;
     margin: 0 auto;
@@ -322,7 +375,7 @@ button {
 
 #cookbookForm #cookbookTitle{
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--grey-200);
     font-size: large;
     margin-bottom: 1em;
     min-width: 300px;
@@ -339,7 +392,7 @@ button {
     resize:none;
     width: 40vw;
     margin-top: 0.5em;
-    border: 1px solid gray;
+    border: 1px solid var(--grey-200);
     border-radius: 0.4em;
     min-width: 300px;
     height: 100px;
@@ -350,11 +403,17 @@ button {
     display: block;
     margin: 2em auto 0 auto;
     border-radius: 1em;
-    padding: 5px;
-    background-color: rgb(198, 229, 240);
-    border: 2px solid rgb(120, 146, 204);
+    padding: 8px;
+    background-color: var(--color-primary);
+    color: var(--peach-50);
+    font-weight: 600;
+    border: none;
     max-width: 200px;
     width: 100%;
+}
+
+#cookbookForm #submit:hover{
+    background-color: var(--color-primary-hover);
 }
 
 /* article */
@@ -364,14 +423,13 @@ article{
 
 /* homeleft */
 #left{
-    display: inline-block;
     font-family: quicksand;
 }
 
 #latestRecipes, #latestCookbooks, #popularCategories{
-    border: 1px solid gray;
+    box-shadow: var(--shadow);
     border-radius: 1em;
-    background-color: white;
+    background-color: var(--color-surface);
     width: 18vw;
     padding: 1vw;
     margin: 2vw;
@@ -381,9 +439,15 @@ article{
     list-style-type: none;
     padding: 5px;
     margin: 0;
-    border: 1px solid grey;
+    border: 1px solid var(--color-border);
     margin-bottom: 1vw;
     border-radius: 8px;
+}
+
+#latestRecipes li:hover, #latestCookbooks li:hover{
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    transition: transform 0.12s ease, border-color 0.12s ease;
 }
 
 #latestRecipes li h4, #latestCookbooks li h4{
@@ -395,7 +459,7 @@ article{
     margin: 0;
     padding: 0;
     text-decoration: none;
-    color: black;
+    color: var(--color-heading);
 }
 
 #latestRecipes li p, #latestCookbooks li p{
@@ -417,23 +481,31 @@ article{
     text-decoration: none;
     margin: 0;
     padding: 0;
-    color: black;
+    color: var(--color-text);
+}
+
+#popularCategories li a:hover{
+    color: var(--color-primary-hover);
 }
 
 /* home main */
 
 #homeMain{
-    border: 1px solid gray;
+    box-shadow: var(--shadow);
     border-radius: 1em;
-    background-color: white;
+    background-color: var(--color-surface);
     width: 100%;
     padding: 1vw;
     margin: 2vw;
     font-family: quicksand;
 }
 
+#homeMain h3{
+    color: var(--color-heading);
+}
+
 #userRecipes, #userCookbooks{
-    border: 1px solid gray;
+    border: 1px solid var(--color-border);
     border-radius: 1em;
     margin: 1em 0;
 }

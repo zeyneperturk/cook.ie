@@ -1,5 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
+:root{
+    /* peach — core brand */
+    --peach-50:#FDF0EC; --peach-100:#F8CDBF; --peach-200:#F0A990;
+    --peach-400:#E8917A; --peach-600:#C87070; --peach-800:#7A3A3A; --peach-900:#4A3535;
+
+    /* neutral grey (warm) */
+    --grey-50:#F5F2F1; --grey-100:#E4DFDD; --grey-200:#C9C2BF;
+    --grey-400:#9A908C; --grey-600:#6E6360; --grey-800:#463E3C; --grey-900:#2C2725;
+
+    /* semantic */
+    --success-bg:#E8F1E3; --success:#7CA362; --success-text:#33502A;
+    --danger-bg:#F9E4E6;  --danger:#CC3344;  --danger-text:#6E1620;
+
+    /* role aliases */
+    --color-bg:var(--peach-50);
+    --color-surface:#ffffff;
+    --color-text:var(--peach-900);
+    --color-heading:var(--peach-800);
+    --color-primary:var(--peach-400);
+    --color-primary-hover:var(--peach-600);
+    --color-border:var(--peach-100);
+    --color-muted:var(--grey-400);
+    --radius:12px;
+    --shadow:0 2px 8px rgba(0,0,0,0.07);
+}
+
 #login h1, #signup h1, #newRecipe h1, #newCookbook h1{
     font-family: Nunito;
     font-size: 3em;
@@ -8,15 +34,20 @@
     padding: 0;
 }
 
+#login h1, #signup h1, #newRecipe h1, #newCookbook h1{
+    color: var(--color-heading);
+}
+
 #login h1 a, #signup h1 a, #newRecipe h1 a, #newCookbook h1 a{
-    color: black;
+    color: var(--color-heading);
     text-decoration: none;
 }
 
 body{
+    background-color: var(--color-bg);
     background-image: url("../../public/img/bg.png");
     background-repeat: repeat;
-    background-size: 400px;
     background-attachment: fixed;
-    
+    font-family: quicksand;
+    color: var(--color-text);
 }

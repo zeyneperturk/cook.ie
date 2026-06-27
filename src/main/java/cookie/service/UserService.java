@@ -29,6 +29,14 @@ public class UserService implements UserDetailsService{
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
+
+	public boolean existsByEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
+
+	public boolean existsByUsername(String username) {
+		return userRepository.existsByUsername(username);
+	}
 	
 	public User getUserByEmail(String email)
 	{

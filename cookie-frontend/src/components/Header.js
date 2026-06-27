@@ -8,7 +8,7 @@ function Header({onLogout}){
     return(
         <div id="header">
             <h1><Link to="/home">cook.ie</Link></h1>
-            <input type="text"></input>
+            <input type="text" placeholder="Search recipes, users, cookbooks..."></input>
             <div id="nav">
                 
                 <Link>Explore</Link>

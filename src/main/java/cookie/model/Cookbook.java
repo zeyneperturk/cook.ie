@@ -30,7 +30,7 @@ public class Cookbook {
     private String description;
     
     @ManyToOne
-    @JoinColumn(name="uid", nullable = true)
+    @JoinColumn(name="uid")
     @JsonBackReference("cookbook-user")
     private User user;
     

@@ -1,10 +1,10 @@
 package cookie.controller;
 
 import cookie.dto.LoginRequest;
+import cookie.dto.SignupRequest;
 import cookie.dto.UserDTO;
 import cookie.mapper.UserMapper;
 import cookie.model.User;
-import cookie.repository.UserRepository;
 import cookie.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,20 +17,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.naming.AuthenticationException;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials="true")
 public class UserController {
 	
 	@Autowired
@@ -38,10 +35,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping
 	public List<UserDTO> getAllUsers() {
 	   return userService.getAllUsers().stream()
@@ -50,10 +44,31 @@ public class UserController {
 	}
     
     @PostMapping
-    public UserDTO createUser(@RequestBody User user)
+    public ResponseEntity<?> createUser(@RequestBody SignupRequest request)
     {
+    	if(isBlank(request.getUsername()) || isBlank(request.getEmail()) || isBlank(request.getPassword())
+    			|| isBlank(request.getFirst_name()) || isBlank(request.getLast_name()))
+    		return ResponseEntity.badRequest().body(Map.of("error", "All fields are required"));
+
+    	if(userService.existsByEmail(request.getEmail()))
+    		return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Email already in use"));
+
+    	if(userService.existsByUsername(request.getUsername()))
+    		return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Username already taken"));
+
+    	User user = new User();
+    	user.setFirst_name(request.getFirst_name());
+    	user.setLast_name(request.getLast_name());
+    	user.setUsername(request.getUsername());
+    	user.setEmail(request.getEmail());
+    	user.setPassword(request.getPassword());
+
     	User u = userService.createUser(user);
-    	return UserMapper.toDTO(u);
+    	return ResponseEntity.ok(UserMapper.toDTO(u));
+    }
+
+    private boolean isBlank(String s) {
+    	return s == null || s.trim().isEmpty();
     }
     
     @PostMapping("/login")
@@ -68,23 +83,20 @@ public class UserController {
 		SecurityContext context = SecurityContextHolder.createEmptyContext();
 		context.setAuthentication(authentication);
 		SecurityContextHolder.setContext(context);
-		
-		System.out.println(loginRequest.getUsername() + loginRequest.getPassword());
 
-		request.getSession(true).setAttribute(
+		HttpSession session = request.getSession(true);
+		session.setAttribute(
 		    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
 		    context
 		);
 		String username = authentication.getName();
-		System.out.println(username);
 		User user = userService.getUserByUsername(username);
 		UserDTO dto = UserMapper.toDTO(user);
-	    request.getSession(true).setAttribute("user", dto);
+	    session.setAttribute("user", dto);
 
 		return ResponseEntity.ok(dto);
     	}catch(Exception e){
-    		e.printStackTrace();
-    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Invalid username or password"));
     	}
     }
     

@@ -1,9 +1,6 @@
 package cookie.controller;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
 import java.util.Date;
-import org.springframework.core.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,8 +26,6 @@ import cookie.model.Recipe;
 import cookie.model.User;
 import cookie.repository.IngredientRepository;
 import cookie.repository.InstructionRepository;
-import cookie.repository.RecipeRepository;
-import cookie.repository.UserRepository;
 import cookie.service.RecipeService;
 import cookie.service.UserService;
 
@@ -77,10 +72,6 @@ public class RecipeController {
 		{
 			for(Ingredient val : ing)
 			{
-				System.out.println(val.getId().getName());
-				System.out.println(val.getId().getRid());
-				System.out.println(val.getQuantity());
-				System.out.println(val.getUnit());
 				val.setRecipe(save);
 				val.setId(new KeyIngredient(save.getRid(), val.getId().getName()));
 				ingRepository.save(val);
@@ -92,9 +83,6 @@ public class RecipeController {
 		{
 			for(Instruction val : ins)
 			{
-				System.out.println(val.getId().getStep_num());
-				System.out.println(val.getId().getRid());
-				System.out.println(val.getText());
 				val.setRecipe(save);
 				val.setId(new KeyInstruction(val.getId().getStep_num(), save.getRid()));
 				insRepository.save(val);
